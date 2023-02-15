@@ -1,4 +1,3 @@
-from asyncio import Queue
 from aiohttp import web, ClientSession
 
 
