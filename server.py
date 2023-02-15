@@ -15,7 +15,7 @@ async def ws_handler(request: web.Request):
     if not available:
         with open("client.html", "rb") as fp:
             return web.Response(body=fp.read(), content_type="text/html")
-
+        
     await response.prepare(request)
 
     await response.send_str("Welcome!!!")
@@ -35,13 +35,10 @@ async def ws_handler(request: web.Request):
                 return response
         return response
 
-
     finally:
 
         request.app["sockets"].remove(response)
-
         print("Someone disconnected.")
-
         for ws in request.app["sockets"]:
             await ws.send_str("Someone disconnected.")
 
